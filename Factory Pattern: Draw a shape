@@ -1,0 +1,50 @@
+
+from shape_factory import shapeFactory
+from all_shapes import Circle
+print("Entering a shape type")
+
+
+factory= shapeFactory()
+circleObj=factory.getShape("Circle")
+circleObj.draw()
+
+rectObj= factory.getShape("Rectangle")
+rectObj.draw()
+
+################OUTPUT
+# Entering a shape type
+# Drawing a circle
+# Drawing a Rectangle
+
+#####SHAPE INTERFACE#####
+from abc import ABC, abstractmethod
+class Shape(ABC):
+    @abstractmethod
+    def draw(self):
+        pass
+
+#####ALL SHAPES#####
+from shape import Shape
+
+class Circle(Shape):
+    def draw(self):
+        print("Drawing a circle")
+
+class Square(Shape):
+    def draw(self):
+        print("Drawing a Square")
+
+class Rectangle(Shape):
+    def draw(self):
+        print("Drawing a Rectangle")
+
+#####SHAPE FACTORY #####
+from shape import Shape
+from all_shapes import Circle, Square, Rectangle
+
+class shapeFactory:
+    def getShape(self, shape_type:str):
+        if shape_type.lower()=="circle":
+            return Circle()
+        if shape_type.lower()=="rectangle":
+            return Rectangle()
