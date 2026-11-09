@@ -1,0 +1,49 @@
+
+Main.java
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+      PaymentService service= new PaymentService(new CardPayment());
+      service.checkout(100);
+    }
+}
+
+
+PaymentStrategy.java
+interface PaymentStrategy{
+  void pay(double amount);
+}
+
+
+UpiPayment.java
+class UpiPayment implements PaymentStrategy{
+  @Override
+  public void pay(double amount){
+    System.out.println("UPI payment of $" + amount);
+  }
+}
+
+CardPayment.java
+ 
+class CardPayment implements PaymentStrategy{
+  @Override
+  public void pay(double amount){
+    System.out.println("Card payment of $" + amount);
+  }
+}
+
+
+PaymentService.java
+class PaymentService{
+  private PaymentStrategy strategy;
+  //constructor
+  public PaymentService(PaymentStrategy pStrategy){
+    this.strategy= pStrategy;
+  }
+  public void setStrategy(PaymentStrategy pStrategy){
+    this.strategy= pStrategy;
+  }
+  public void checkout(double amount){
+    strategy.pay(amount);
+  }
+}
